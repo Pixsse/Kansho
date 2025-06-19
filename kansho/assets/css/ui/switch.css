@@ -1,0 +1,13 @@
+.nui-switch[data-checked] {
+  background-color: hsl(var(--secondary));
+  border-color: hsl(var(--secondary));
+}
+
+.nui-switch {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--border));
+}
+
+.nui-switch__handle {
+  background-color: hsl(var(--card));
+}

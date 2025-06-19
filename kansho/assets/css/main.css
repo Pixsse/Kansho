@@ -1,1 +1,161 @@
+/* Imported */
 @import "tailwindcss";
+@import "@nuxt/ui";
+
+/* UI */
+@import "./ui/switch.css";
+
+@layer base {
+  :root {
+    --background: 233 50% 98%;
+    --foreground: 233 56% 0%;
+    --muted: 0 32% 91%;
+    --muted-foreground: 0 2% 37%;
+    --popover: 233 50% 98%;
+    --popover-foreground: 233 56% 0%;
+    --card: 233 50% 97%;
+    --card-foreground: 0 0% 0%;
+    --border: 233 10% 88%;
+    --input: 233 10% 88%;
+    --primary: 233 72% 88%;
+    --primary-foreground: 233 72% 28%;
+    --secondary: 0 0% 85%;
+    --secondary-foreground: 0 0% 25%;
+    --accent: 0 8% 76%;
+    --accent-foreground: 0 8% 16%;
+    --destructive: 22 94% 22%;
+    --destructive-foreground: 22 94% 82%;
+    --ring: 233 72% 88%;
+    --chart-1: 233 72% 88%;
+    --chart-2: 0 0% 85%;
+    --chart-3: 0 8% 76%;
+    --chart-4: 0 0% 88%;
+    --chart-5: 233 75% 88%;
+    --radius: 0.5rem;
+    --icon: 223 50% 15%;
+  }
+
+  .dark {
+    --background: 233 52% 1%;
+    --foreground: 233 29% 99%;
+    --muted: 233 32% 9%;
+    --muted-foreground: 233 2% 63%;
+    --popover: 233 52% 1%;
+    --popover-foreground: 233 29% 99%;
+    --card: 233 52% 2%;
+    --card-foreground: 0 0% 100%;
+    --border: 233 10% 15%;
+    --input: 233 10% 15%;
+    --primary: 233 72% 88%;
+    --primary-foreground: 233 72% 28%;
+    --secondary: 233 2% 14%;
+    --secondary-foreground: 233 2% 74%;
+    --accent: 233 10% 20%;
+    --accent-foreground: 233 10% 80%;
+    --destructive: 22 94% 47%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 233 72% 88%;
+    --chart-1: 233 72% 88%;
+    --chart-2: 233 2% 14%;
+    --chart-3: 233 10% 20%;
+    --chart-4: 233 2% 17%;
+    --chart-5: 233 75% 88%;
+    --icon: 223 56% 99%;
+  }
+}
+  
+
+
+/* === White mode === */
+.main-bg-background                     { background-color: hsl(var(--background)); }
+.main-bg-muted                          { background-color: hsl(var(--muted)); }
+.main-bg-popover                        { background-color: hsl(var(--popover)); }
+.main-bg-card                           { background-color: hsl(var(--card)); }
+.main-bg-primary                        { background-color: hsl(var(--primary)); }
+.main-bg-secondary                      { background-color: hsl(var(--secondary)); }
+.main-bg-accent                         { background-color: hsl(var(--accent)); }
+.main-bg-destructive                    { background-color: hsl(var(--destructive)); }
+
+.main-text-foreground                   { color: hsl(var(--foreground)); }
+.main-text-muted-foreground             { color: hsl(var(--muted-foreground)); }
+.main-text-popover-foreground           { color: hsl(var(--popover-foreground)); }
+.main-text-card-foreground              { color: hsl(var(--card-foreground)); }
+.main-text-primary-foreground           { color: hsl(var(--primary-foreground)); }
+.main-text-secondary-foreground         { color: hsl(var(--secondary-foreground)); }
+.main-text-accent-foreground            { color: hsl(var(--accent-foreground)); }
+.main-text-destructive-foreground       { color: hsl(var(--destructive-foreground)); }
+
+.main-border                            { border-color: hsl(var(--border)); }
+.main-input                             { border-color: hsl(var(--input)); }
+.main-ring                              { box-shadow: 0 0 0 2px hsl(var(--ring)); }
+.main-border-primary                    { border-color: hsl(var(--primary)); }
+.main-border-accent                     { border-color: hsl(var(--accent)); }
+.main-border-destructive                { border-color: hsl(var(--destructive)); }
+
+.main-bg-card                           { background-color: hsl(var(--card)); }
+.main-bg-popover                        { background-color: hsl(var(--popover)); }
+
+.main-radius                            { border-radius: var(--radius); }
+
+.main-bg-chart-1                        { background-color: hsl(var(--chart-1)); }
+.main-bg-chart-2                        { background-color: hsl(var(--chart-2)); }
+.main-bg-chart-3                        { background-color: hsl(var(--chart-3)); }
+.main-bg-chart-4                        { background-color: hsl(var(--chart-4)); }
+.main-bg-chart-5                        { background-color: hsl(var(--chart-5)); }
+
+.main-icon                              {fill: hsl(var(--foreground)); color: hsl(var(--icon)); transition: color 0.2s, fill 0.2s;}
+
+
+/* === Dark mode === */
+.dark .main-bg-background               { background-color: hsl(var(--background)); }
+.dark .main-bg-muted                    { background-color: hsl(var(--muted)); }
+.dark .main-bg-popover                  { background-color: hsl(var(--popover)); }
+.dark .main-bg-card                     { background-color: hsl(var(--card)); }
+.dark .main-bg-primary                  { background-color: hsl(var(--primary)); }
+.dark .main-bg-secondary                { background-color: hsl(var(--secondary)); }
+.dark .main-bg-accent                   { background-color: hsl(var(--accent)); }
+.dark .main-bg-destructive              { background-color: hsl(var(--destructive)); }
+
+.dark .main-text-foreground             { color: hsl(var(--foreground)); }
+.dark .main-text-muted-foreground       { color: hsl(var(--muted-foreground)); }
+.dark .main-text-popover-foreground     { color: hsl(var(--popover-foreground)); }
+.dark .main-text-card-foreground        { color: hsl(var(--card-foreground)); }
+.dark .main-text-primary-foreground     { color: hsl(var(--primary-foreground)); }
+.dark .main-text-secondary-foreground   { color: hsl(var(--secondary-foreground)); }
+.dark .main-text-accent-foreground      { color: hsl(var(--accent-foreground)); }
+.dark .main-text-destructive-foreground { color: hsl(var(--destructive-foreground)); }
+
+.dark .main-border                      { border-color: hsl(var(--border)); }
+.dark .main-input                       { border-color: hsl(var(--input)); }
+.dark .main-ring                        { box-shadow: 0 0 0 2px hsl(var(--ring)); }
+.dark .main-border-primary              { border-color: hsl(var(--primary)); }
+.dark .main-border-accent               { border-color: hsl(var(--accent)); }
+.dark .main-border-destructive          { border-color: hsl(var(--destructive)); }
+
+.dark .main-bg-chart-1                  { background-color: hsl(var(--chart-1)); }
+.dark .main-bg-chart-2                  { background-color: hsl(var(--chart-2)); }
+.dark .main-bg-chart-3                  { background-color: hsl(var(--chart-3)); }
+.dark .main-bg-chart-4                  { background-color: hsl(var(--chart-4)); }
+.dark .main-bg-chart-5                  { background-color: hsl(var(--chart-5)); }
+                
+.dark .main-radius                      { border-radius: var(--radius); }
+
+.dark .main-icon                        {fill: hsl(var(--foreground)); color: hsl(var(--foreground)); transition: color 0.2s, fill 0.2s;}
+
+
+html, body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+
+video::cue {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.2em 0.5em;
+  border-radius: 0.2em;
+}
