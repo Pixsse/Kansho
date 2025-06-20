@@ -1,36 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-import Sidebar from '~/components/ui/Sidebar.vue'
-import { Menu, IndentDecrease, IndentIncrease, X } from 'lucide-vue-next';
-
-const sidebarOpen = ref(false)
-
-const LibraryNav = [
-  { href: '/', label: 'My Media' },
-  { href: '/', label: 'Favorites' },
-  { href: '/', label: 'Playlists' },
-  { href: '/', label: 'History' },
-]
-const SubLangNav = [
-  { href: '/', label: 'Manage Subtitles' },
-  { href: '/', label: 'Download Subtitle' },
-  { href: '/', label: 'Audio Language' },
-]
-const PlaybackNav = [
-  { href: '/', label: 'Resume Last Media' },
-  { href: '/', label: 'Chapters / Bookmarks' },
-]
-const ActionsNav = [
-  { href: '/', label: 'Add Media' },
-  { href: '/', label: 'Import / Export' },
-]
-const SettingsNav = [
-  { href: '/', label: 'Playback Speed' },
-  { href: '/', label: 'My Profile' },
-]
-
-</script>
-
 <template>
   <div class="layout">
     <!-- Menu button -->
@@ -47,7 +14,7 @@ const SettingsNav = [
       class="main-bg-card main-border main-radius main-border-1 sidebar"
       :class="{ 'sidebar--open': sidebarOpen }"
     >
-      <Sidebar
+      <NavSidebar
         :LibraryNav="LibraryNav"
         :SubLangNav="SubLangNav"
         :PlaybackNav="PlaybackNav"
@@ -63,6 +30,50 @@ const SettingsNav = [
   </div>
 </template>
 
+<script setup lang="ts">
+// Vue
+import { ref, onMounted, watch, type Ref } from 'vue'
+// Lucid
+import { Menu, X } from 'lucide-vue-next';
+// Utils
+import { setSidebarState, getSidebarState } from '~/utils/storageUtils'
+// Components
+import NavSidebar from '~/components/ui/NavSidebar.vue'
+
+
+const sidebarOpen: Ref<boolean> = ref(true)
+
+onMounted(() => {
+  const storageValue = getSidebarState()
+  sidebarOpen.value = storageValue === 'true'
+})
+
+watch(sidebarOpen, val => setSidebarState(val.toString()))
+
+
+const LibraryNav = [
+  { href: '/', label: 'My Media' },
+  { href: '/', label: 'Favorites' },
+  { href: '/', label: 'Playlists' },
+  { href: '/', label: 'History' },
+]
+const SubLangNav = [
+  { href: '/', label: 'Manage Subtitles' },
+  { href: '/', label: 'Import Subtitles' },
+]
+const PlaybackNav = [
+  { href: '/', label: 'Resume Last Media' },
+  { href: '/', label: 'Chapters / Bookmarks' },
+]
+const ActionsNav = [
+  { href: '/', label: 'Import Media' },
+]
+const SettingsNav = [
+  { href: '/', label: 'Settings' },
+]
+
+</script>
+
 <style scoped>
 .layout {
   display: flex;
@@ -77,26 +88,11 @@ const SettingsNav = [
   z-index: 105;
   cursor: pointer;
   transition: background 0.2s;
-
 }
 
 .icon-menu-size {
   width: 30px;
   height: 30px;
-}
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 260px;
-  box-shadow: 2px 0 12px #0001;
-  z-index: 102;
-  transform: translateX(-110%);
-  transition: transform 0.25s cubic-bezier(.7,0,.3,1);
-  overflow-y: auto;
-  max-width: 80vw;
 }
 
 .main-border-1 {

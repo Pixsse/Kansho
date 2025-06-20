@@ -11,8 +11,9 @@
         {{ item.label }}
       </a>
     </div>
+
     <div>
-      <h3 class="main-text-muted-foreground">Subtitles & Languages</h3>
+      <h3 class="main-text-muted-foreground">Subtitles</h3>
       <a
         v-for="item in SubLangNav"
         :key="item.label"
@@ -48,7 +49,17 @@
     </div>
        
     <div>
-      <h3 class="main-text-muted-foreground">Settings</h3>
+      <hr>
+      <div class="main-text-foreground theme">
+        <span class="flex-1">Theme</span>
+          <USwitch
+            color="neutral"
+            size="xl"
+            v-model="isDarkMode"
+            unchecked-icon="i-lucide-moon"
+            checked-icon="i-lucide-sun"
+          />
+      </div>
       <a
         v-for="item in SettingsNav"
         :key="item.label"
@@ -57,43 +68,45 @@
       >
         {{ item.label }}
       </a>
-      <hr>
-      <div class="main-text-foreground theme">
-        <span class="flex-1">Theme</span>
-          <USwitch
-            color="neutral"
-            size="xl"
-            v-model="isDark"
-            unchecked-icon="i-lucide-moon"
-            checked-icon="i-lucide-sun"
-          />
-      </div>
     </div>
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Vue
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+//Utils
+import { getTheme, setTheme } from '~/utils/storageUtils';
 
-const isDark = ref(false)
+const isDarkMode = ref(false)
 
-defineProps({
-  LibraryNav: { type: Array, default: () => [] },
-  SubLangNav: { type: Array, default: () => [] },
-  PlaybackNav: { type: Array, default: () => [] },
-  ActionsNav: { type: Array, default: () => [] },
-  SettingsNav: { type: Array, default: () => [] },
-})
+defineProps<{
+  LibraryNav?: any[]
+  SubLangNav?: any[]
+  PlaybackNav?: any[]
+  ActionsNav?: any[]
+  SettingsNav?: any[]
+}>()
 
 onMounted(() => {
-  isDark.value = document.documentElement.classList.contains('dark')
+  const theme = getTheme()
+  if (theme) {
+    isDarkMode.value = theme === 'dark'
+  } else {
+    isDarkMode.value = window.matchMedia('dark').matches
+  }
+  applyTheme(isDarkMode.value)
 })
 
-watch(isDark, (val) => {
-  document.documentElement.classList.toggle('dark', val)
-  localStorage.setItem('theme', val ? 'dark' : 'light')
+watch(isDarkMode, (val) => {
+  applyTheme(val)
 })
+
+function applyTheme(dark: boolean) {
+  document.documentElement.classList.toggle('dark', dark)
+  setTheme(dark ? 'dark' : '')
+}
+
 </script>
 
 <style scoped>

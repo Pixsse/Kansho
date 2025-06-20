@@ -25,7 +25,6 @@ function onFile(event: Event) {
   const name = file.name.toLowerCase()
   if (!name.endsWith('.srt') && !name.endsWith('.vtt')) return
 
-
   emit('selected', file)
 }
 </script>

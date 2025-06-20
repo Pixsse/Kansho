@@ -1,0 +1,19 @@
+.sidebar {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  box-shadow: 2px 0 12px #0001;
+  z-index: 102;   
+  transition: transform 0.25s cubic-bezier(.7,0,.3,1);
+  overflow-y: auto;
+  max-width: 80vw;
+  transform: translateX(-110%);
+}
+
+.sidebar--ready {
+  transition: transform 0.25s cubic-bezier(.7,0,.3,1);
+}
+.sidebar--open {
+  transform: translateX(0);
+}

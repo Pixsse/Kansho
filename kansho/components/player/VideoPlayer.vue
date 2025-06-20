@@ -9,8 +9,8 @@
   >
     <track
       kind="subtitles"
-      label="FR"
-      srclang="fr"
+      label="JP"
+      srclang="jp"
       :src="trackUrl"
     />
   </video>

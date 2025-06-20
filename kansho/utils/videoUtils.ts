@@ -46,22 +46,16 @@ export function loadVideo(file: File, videoRef: Ref<string>, trackRef: Ref<strin
  * ```
  */
 export async function loadSubtitle(file: File, trackRef: Ref<string>): Promise<void> {
-  // 1) Lecture brute
   const buffer = await file.arrayBuffer()
-  // 2) Décodage en UTF-8 (on enlève le BOM si présent)
   const decoder = new TextDecoder('utf-8')
   let text = decoder.decode(buffer).replace(/^\uFEFF/, '')
 
-  // 3) Si c'est du SRT, on convertit en VTT
   if (file.name.toLowerCase().endsWith('.srt')) {
-    // supprime fins de ligne Windows, convertit toutes les virgules sur les timecodes
     text = text
       .replace(/\r+/g, '')                                      // CRLF → LF
       .replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, '$1.$2')         // hh:mm:ss,mmm → hh:mm:ss.mmm
-    // ajoute l’en-tête WebVTT
     text = 'WEBVTT\n\n' + text
   }
-  // 4) Création du blob VTT et URL
   const blob = new Blob([text], { type: 'text/vtt' })
   trackRef.value = URL.createObjectURL(blob)
 }

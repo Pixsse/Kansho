@@ -1,6 +1,6 @@
 <template>
   <label class="flex flex-col">
-    <span class="font-medium">Choisir une vidéo</span>
+    <span class="font-medium text-center">Import a media file</span>
     <input
       type="file"
       accept=".mp4,.mkv"
@@ -16,7 +16,6 @@ import { defineEmits } from 'vue'
 const emit = defineEmits<{
   (e: 'selected', file: File): void
 }>()
-
 
 function onFile(event: Event) {
   const input = event.target as HTMLInputElement
