@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <SubtitleUploader class="mt-4" @selected="onSubtitleSelected" />
+      <SubtitleUploader class="subtitle-uploader" @selected="onSubtitleSelected" />
     </div>
   </div>
 </template>
@@ -118,12 +118,12 @@ let hideControlsTimeout: ReturnType<typeof setTimeout> | null = null
 
 function showAndAutoHideControls() {
   showControls.value = true
+  if (isSeeking) return
   if (hideControlsTimeout) clearTimeout(hideControlsTimeout)
   hideControlsTimeout = setTimeout(() => {
     showControls.value = false
   }, hideDelay)
 }
-
 function togglePlay() {
   if (!player.value) return;
   if (player.value.paused) {
@@ -290,9 +290,10 @@ video::cue {
 }
 .subtitle-overlay {
   position: absolute;
-  bottom: 5rem;
+  bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
+  
   pointer-events: none;
   max-width: 90%;
   text-align: center;
@@ -303,7 +304,6 @@ video::cue {
   color: #fff;
   font-size: 1.5rem;
   padding: 0.2em 0.3em;
-  margin-bottom: 125px;
   border-radius: 0.2em;
   pointer-events: auto;
   user-select: text;
